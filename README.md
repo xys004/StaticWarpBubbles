@@ -1,4 +1,4 @@
-# Static Warp Bubbles (2025)
+# Static Warp Bubbles
 
 This repository contains the implementation of the **Static Spherically-Symmetric Warp Bubble** metric described by Bolívar, Abellán, and Vasilev (2025).
 
