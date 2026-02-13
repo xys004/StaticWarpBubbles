@@ -19,6 +19,13 @@ It is built as an extension to [pyWarpFactory](https://github.com/NerdsWithAttit
     pip install -e .
     ```
 
+## Google Colab
+
+To run this toolkit in the cloud:
+1.  Open [Google Colab](https://colab.research.google.com/).
+2.  Upload `StaticWarpBubbles_Colab.ipynb` from this repository.
+3.  Run the cells (the notebook handles installing `pyWarpFactory` and the extension automatically).
+
 ## Structure
 
 -   `static_bubbles/`: Core Python package.
