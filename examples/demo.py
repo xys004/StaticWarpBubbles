@@ -96,28 +96,22 @@ def run_demo(label, rho_func, grid_params, plot_params):
     plt.close()
 
 
+from static_bubbles.profiles import profile_single_shell, profile_double_shell
+
 def example_1_single_shell():
     """
     Example 1: Piecewise-exponential (Single Shell).
-    rho(r) = 0 for r < 2/b
-    rho(r) = a * exp(-b*r) for r >= 2/b
-    
-    Params from paper Fig 2: a=1, b=1 => r_crit = 2.
+    Params from paper Fig 2: a=1, b=1.
     """
     a = 1.0
     b = 1.0
-    r_crit = 2.0 / b
     
-    def rho_func(r):
-        # We need to handle r being an array
-        val = np.zeros_like(r)
-        mask = r >= r_crit
-        val[mask] = a * np.exp(-b * r[mask])
-        return val
+    # Create a callable that only takes r (fixing params)
+    rho_func = lambda r: profile_single_shell(r, a=a, b=b)
 
     grid_params = {
-        'size': (3, 120, 120, 120), # Finer grid for the jump
-        'scale': (1.0, 0.1, 0.1, 0.1), # dx=0.1. Region of interest 0 to 8
+        'size': (3, 120, 120, 120),
+        'scale': (1.0, 0.1, 0.1, 0.1),
         'center': (0, 6.0, 6.0, 6.0)
     }
     
@@ -126,35 +120,17 @@ def example_1_single_shell():
 def example_2_double_shell():
     """
     Example 2: Exponential/Power law decay (Double Shell).
-    rho(r) = 0 for r < R
-    rho(r) = A * exp(-b(r-R)) / r^2 for R <= r <= 2/b
-    rho(r) = 0 for r > 2/b
-    
-    Params from paper Fig 5: a=1, b=1, R=b/2 = 0.5.
-    (Note: Paper uses 'A' in eq 23, 'a' in caption. Assuming A=a=1).
-    Split points: 0.5 and 2.0.
+    Params from paper Fig 5: A=1, b=1, R=0.5.
     """
     A = 1.0
     b = 1.0
     R = 0.5
-    r_outer = 2.0 / b # 2.0
     
-    def rho_func(r):
-        val = np.zeros_like(r)
-        
-        # Region II: R <= r <= 2/b
-        mask = (r >= R) & (r <= r_outer)
-        
-        # Avoid division by zero if R=0 (though R=0.5 here)
-        # We only evaluate where mask is true, and r >= R > 0
-        r_safe = r[mask]
-        val[mask] = (A * np.exp(-b * (r_safe - R))) / (r_safe**2)
-        
-        return val
+    rho_func = lambda r: profile_double_shell(r, A=A, b=b, R=R)
 
     grid_params = {
         'size': (3, 120, 120, 120),
-        'scale': (1.0, 0.05, 0.05, 0.05), # Finer resolution for the narrow shell
+        'scale': (1.0, 0.05, 0.05, 0.05),
         'center': (0, 3.0, 3.0, 3.0) 
     }
     
