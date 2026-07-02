@@ -1,0 +1,8 @@
+google-genai==0.3.0
+pygad==3.6.0
+scipy==1.11.3
+numpy==1.26.0
+matplotlib==3.8.0
+google-cloud-storage==2.14.0
+google-cloud-aiplatform==1.38.0
+tenacity==8.2.3

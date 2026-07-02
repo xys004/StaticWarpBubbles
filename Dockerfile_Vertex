@@ -1,0 +1,29 @@
+# Cloud Deployment Dockerfile for AutoWarp Swarm in Google Vertex AI
+FROM python:3.9-slim
+
+# Set environment paths and variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/workspace/pyWarpFactory:/workspace/StaticWarpBubbles
+
+# Working directory inside Vertex Container
+WORKDIR /workspace
+
+# Install core build libraries for C-extensions (like Scipy)
+RUN apt-get update && apt-get install -y build-essential git && rm -rf /var/lib/apt/lists/*
+
+# Assuming pyWarpFactory was cloned locally, we'll copy the entire tree.
+# This requires running `docker build` from the Documents level or fetching pyWarpFactory natively.
+# For isolation, we install dependencies first.
+COPY AutoWarpSwarm_repo/requirements_cloud.txt .
+RUN pip install --no-cache-dir -r requirements_cloud.txt
+
+# To ensure the rigorous backend works, install pyWarpFactory from github if it's the open-source version, 
+# or we'll copy it from the local context in the deployment script.
+# (We assume the deployment powershell script copies pyWarpFactory into the build context).
+
+# Copy the entire workspace into container
+COPY . ./StaticWarpBubbles/
+
+# We trigger the cloud synced main loop
+ENTRYPOINT ["python", "StaticWarpBubbles/AutoWarpSwarm_repo/main_loop.py"]
