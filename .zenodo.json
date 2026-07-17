@@ -1,0 +1,19 @@
+{
+  "title": "StaticWarpBubbles",
+  "description": "Python toolkit for constructing and analyzing static, spherically symmetric warp-bubble metrics from prescribed energy-density profiles.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Bolívar, Nelson",
+      "affiliation": "Astrum Drive"
+    }
+  ],
+  "keywords": [
+    "general relativity",
+    "warp drive",
+    "static warp bubbles",
+    "energy conditions",
+    "symbolic computation"
+  ],
+  "notes": "Developed by Nelson Bolívar (GitHub: xys004) as part of Astrum Drive. Repository: https://github.com/AstrumDrive/StaticWarpBubbles"
+}

@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "StaticWarpBubbles"
+abstract: >-
+  Python toolkit for constructing and analyzing static, spherically symmetric
+  warp-bubble metrics from prescribed energy-density profiles.
+type: software
+authors:
+  - family-names: "Bolívar"
+    given-names: "Nelson"
+    affiliation: "Astrum Drive"
+repository-code: "https://github.com/AstrumDrive/StaticWarpBubbles"
+url: "https://github.com/AstrumDrive/StaticWarpBubbles"
+keywords:
+  - general relativity
+  - warp drive
+  - static warp bubbles
+  - energy conditions
+  - symbolic computation
